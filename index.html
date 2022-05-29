@@ -18,14 +18,19 @@
         function drawTask(task, position) {
             const taskListContainer = document.getElementById("todo-list-container");
 
-            const titleDiv = document.createElement("div");
-            titleDiv.textContent = task.title;
-
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.checked = task.isDone;
             checkbox.onclick = () => {
                 const updatedTask = onUpdateIsDone(task);
+                tasks[position] = updatedTask;
+                checkbox.checked = updatedTask.isDone;
+            }
+
+            const titleDiv = document.createElement("div");
+            titleDiv.textContent = task.title;
+            titleDiv.onclick = () => {
+                const updatedTask = onTaskTitleClicked(task);
                 tasks[position] = updatedTask;
                 checkbox.checked = updatedTask.isDone;
             }
@@ -107,6 +112,7 @@
             font-size: 1rem;
             line-height: 1.5;
             border: 1px solid transparent;
+            cursor: pointer;
         }
 
         .todo {
@@ -119,11 +125,13 @@
             margin-left: 8px;
             flex: 1;
             font-size: 1.5rem;
+            cursor: pointer;
         }
 
         .todo input {
             width: 1rem;
             height: 1rem;
+            cursor: pointer;
         }
     </style>
 </head>
